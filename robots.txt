@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nyounghokim-hash.github.io/ai-communication-revenue-kit/sitemap.xml
