@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 커뮤니케이터 실전 매출 키트</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #5f6b7a;
+      --line: #d8dee8;
+      --paper: #fbfaf7;
+      --band: #eef5f2;
+      --accent: #0f766e;
+      --accent-dark: #134e4a;
+      --warm: #f4b860;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.65;
+    }
+    header {
+      min-height: 88vh;
+      display: grid;
+      align-items: center;
+      padding: 64px 22px 48px;
+      background:
+        linear-gradient(rgba(251,250,247,.82), rgba(251,250,247,.95)),
+        url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=80") center/cover;
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap {
+      width: min(1060px, 100%);
+      margin: 0 auto;
+    }
+    .hero {
+      max-width: 760px;
+    }
+    .eyebrow {
+      color: var(--accent-dark);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: clamp(40px, 7vw, 74px);
+      line-height: 1.03;
+      margin: 0 0 22px;
+      letter-spacing: 0;
+    }
+    .lead {
+      font-size: clamp(18px, 2.4vw, 24px);
+      color: #354250;
+      max-width: 680px;
+      margin: 0 0 30px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .price {
+      font-weight: 800;
+      color: var(--accent-dark);
+    }
+    section {
+      padding: 58px 22px;
+      border-bottom: 1px solid var(--line);
+    }
+    section:nth-child(even) { background: white; }
+    h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.12;
+      margin: 0 0 18px;
+      letter-spacing: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    section:nth-child(even) .card { background: var(--paper); }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 14px 0 0;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: start;
+    }
+    .note {
+      background: var(--band);
+      border-left: 5px solid var(--accent);
+      padding: 18px;
+      border-radius: 8px;
+    }
+    footer {
+      padding: 34px 22px;
+      color: var(--muted);
+      text-align: center;
+    }
+    @media (max-width: 780px) {
+      header { min-height: 82vh; }
+      .grid, .split { grid-template-columns: 1fr; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div class="eyebrow">29,000원 디지털 템플릿</div>
+      <h1>AI 커뮤니케이터 실전 매출 키트</h1>
+      <p class="lead">혼자 파는 사람이 제안서, 상담 DM, 상세페이지, 후기 요청 메시지를 AI로 빠르게 만드는 복붙형 프롬프트팩입니다.</p>
+      <div class="actions">
+        <a class="button" href="#buy">구성 보기</a>
+        <span class="price">월 7건 판매 목표로 설계</span>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap split">
+      <div>
+        <h2>서비스는 있는데 말문이 막힐 때</h2>
+        <p>이 키트는 AI 사용법을 길게 설명하지 않습니다. 고객에게 보내야 하는 글을 바로 만들도록 고객 언어, 제안서, 상담 답변, 상세페이지, 후기 요청 프롬프트를 한 흐름으로 묶었습니다.</p>
+      </div>
+      <div class="note">
+        구매 후 30분 안에 내 상품의 첫 제안 문장과 1페이지 제안서 초안을 만드는 것을 목표로 합니다.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>포함 내용</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>프롬프트 10종</h3>
+          <p>상품 기획, 상담, 제안서, 상세페이지, 후기 요청까지 바로 복붙해서 씁니다.</p>
+        </div>
+        <div class="card">
+          <h3>CSV 라이브러리</h3>
+          <p>자주 쓰는 프롬프트를 표로 정리해 필요할 때 빠르게 찾습니다.</p>
+        </div>
+        <div class="card">
+          <h3>1페이지 제안서</h3>
+          <p>고객 문제, 제공 범위, 가격, 다음 행동을 한 장으로 정리합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div>
+        <h2>이런 분께 맞아요</h2>
+        <ul>
+          <li>판매 문장을 매번 처음부터 쓰는 분</li>
+          <li>고객 상담 답변을 빠르게 만들고 싶은 분</li>
+          <li>AI 결과가 너무 뻔해서 실무에 못 쓰는 분</li>
+          <li>광고비 없이 작은 상품을 팔아보고 싶은 분</li>
+        </ul>
+      </div>
+      <div>
+        <h2>맞지 않는 경우</h2>
+        <ul>
+          <li>자동 수익이나 보장 수익을 기대하는 경우</li>
+          <li>업종별 완성 카피를 그대로 원하는 경우</li>
+          <li>AI 결과물을 검수하지 않고 보내려는 경우</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="buy">
+    <div class="wrap">
+      <h2>권장 판매가 29,000원</h2>
+      <p>월 18만원 목표라면 7건 판매가 203,000원입니다. 첫 달에는 플랫폼 수수료와 환불 가능성을 고려해 8-10건 판매를 목표로 잡는 것이 좋습니다.</p>
+      <div class="actions">
+        <a class="button" href="../ops/gumroad_listing.md">판매 문구 열기</a>
+        <span class="price">상품 파일은 product 폴더에 있습니다</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    AI 커뮤니케이터 실전 매출 키트
+  </footer>
+</body>
+</html>
