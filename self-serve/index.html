@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Self-Serve Digital Products</title>
+  <meta name="description" content="Self-serve digital products designed for automatic checkout and automatic delivery through a compliant merchant platform.">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../side-hustles.html">Micro Service Lab</a>
+    <a href="../agent-service-desk/">Agent Desk</a>
+  </nav>
+  <main>
+    <p class="price">Designed for automatic payment and automatic delivery</p>
+    <h1>Self-Serve Digital Products</h1>
+    <p class="lead">These products are built so a compliant merchant checkout can collect payment, deliver the ZIP file automatically, and route payouts to the seller account without manual fulfillment.</p>
+
+    <div class="note">
+      Checkout buttons stay disabled until compliant product links are added. This avoids collecting payment before seller, tax, payout, refund, and delivery settings are complete.
+    </div>
+
+    <div class="card">
+      <p class="price">USD 29</p>
+      <h2>Solo Operator AI OS</h2>
+      <p>Reusable AI workflows for freelancers, consultants, and solopreneurs: intake, proposals, delivery, follow-up, quality checks, and a delivery tracker.</p>
+      <button class="button" onclick="buy('soloOperator')">Buy / download automatically</button>
+    </div>
+
+    <div class="card">
+      <p class="price">USD 19</p>
+      <h2>Local Business Copy Kit</h2>
+      <p>Homepage, service page, FAQ, trust signal, and contact CTA templates for local business owners and solo service providers.</p>
+      <button class="button" onclick="buy('localBusiness')">Buy / download automatically</button>
+    </div>
+
+    <div class="card">
+      <p class="price">USD 19</p>
+      <h2>Resume and Job Search Signal Kit</h2>
+      <p>Resume bullet prompts, LinkedIn summary templates, recruiter outreach, project story framing, and an application tracker.</p>
+      <button class="button" onclick="buy('resumeKit')">Buy / download automatically</button>
+    </div>
+
+    <pre id="status">Checkout links are not active yet. Add compliant merchant product URLs in self-serve/config.js.</pre>
+  </main>
+  <script src="config.js"></script>
+  <script>
+    function buy(key) {
+      const url = window.SELF_SERVE_CONFIG.checkoutLinks[key];
+      const status = document.getElementById("status");
+      if (!url) {
+        status.textContent = "Checkout is not enabled yet. The product files are ready, but the seller must connect a compliant merchant checkout first.";
+        return;
+      }
+      window.open(url, "_blank", "noopener");
+    }
+  </script>
+</body>
+</html>
