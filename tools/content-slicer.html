@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Content Slicer</title>
+  <meta name="description" content="A free browser tool for turning one content idea into short post angles.">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <nav><a href="../creator-repurpose.html">Repurpose Pack</a><a href="index.html">Tools</a></nav>
+  <main>
+    <h1>Content Slicer</h1>
+    <p class="lead">Turn one idea into angles for short posts. Nothing is uploaded.</p>
+    <div class="card">
+      <label>Main idea<br><textarea id="idea" style="width:100%;min-height:140px"></textarea></label><br><br>
+      <button class="button" onclick="build()">Slice content</button>
+    </div>
+    <pre id="out"></pre>
+    <p><a class="button" href="../creator-repurpose.html">Request repurpose pack</a></p>
+  </main>
+  <script>
+    function build() {
+      const idea = document.getElementById('idea').value.trim() || 'your main idea';
+      document.getElementById('out').textContent =
+`Content angles from: ${idea}
+
+1. Practical tip: What should the reader do first?
+2. Mistake: What do people usually get wrong?
+3. Example: What is a concrete before/after?
+4. Contrarian angle: What common advice is incomplete?
+5. Checklist: What should the reader verify?
+6. Story: When did this lesson become obvious?
+7. Offer bridge: Who needs help applying this?
+
+Repurpose prompt:
+Turn the idea above into 5 short posts, 1 newsletter intro, and a 7-day posting plan. Keep it specific and non-hype.`;
+    }
+  </script>
+</body>
+</html>

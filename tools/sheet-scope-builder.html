@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sheet Scope Builder</title>
+  <meta name="description" content="A free tool to scope a spreadsheet cleanup request without sharing sensitive data.">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <nav><a href="../spreadsheet-cleanup.html">Spreadsheet Cleanup</a><a href="index.html">Tools</a></nav>
+  <main>
+    <h1>Sheet Scope Builder</h1>
+    <p class="lead">Describe the sheet without sending the data. Use the output to ask for a cleanup quote.</p>
+    <div class="card">
+      <label>Current sheet type<br><input id="type" style="width:100%;min-height:42px"></label><br><br>
+      <label>Main problem<br><textarea id="problem" style="width:100%;min-height:120px"></textarea></label><br><br>
+      <button class="button" onclick="build()">Build scope</button>
+    </div>
+    <pre id="out"></pre>
+    <p><a class="button" href="../spreadsheet-cleanup.html">Request cleanup</a></p>
+  </main>
+  <script>
+    function build() {
+      const type = document.getElementById('type').value.trim() || 'business tracker';
+      const problem = document.getElementById('problem').value.trim() || 'messy columns and unclear summary';
+      document.getElementById('out').textContent =
+`Spreadsheet cleanup scope:
+
+Sheet type: ${type}
+Main problem: ${problem}
+
+Needed output:
+- clearer column names
+- duplicate or empty column review
+- formula opportunities
+- summary view
+- usage notes
+
+Do not send sensitive data until scope and privacy boundaries are confirmed.`;
+    }
+  </script>
+</body>
+</html>

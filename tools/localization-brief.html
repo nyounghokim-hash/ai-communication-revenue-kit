@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Localization Brief Builder</title>
+  <meta name="description" content="A free Korean-English launch localization brief builder.">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <nav><a href="../localization.html">Localization Offer</a><a href="index.html">Tools</a></nav>
+  <main>
+    <h1>Localization Brief Builder</h1>
+    <p class="lead">Create a simple brief before localizing Korean product copy into English launch copy.</p>
+    <div class="card">
+      <label>Product<br><input id="product" style="width:100%;min-height:42px"></label><br><br>
+      <label>Target audience<br><input id="audience" style="width:100%;min-height:42px"></label><br><br>
+      <label>Where it will launch<br><input id="channel" style="width:100%;min-height:42px"></label><br><br>
+      <button class="button" onclick="build()">Build brief</button>
+    </div>
+    <pre id="out"></pre>
+    <p><a class="button" href="../localization.html">Request localization</a></p>
+  </main>
+  <script>
+    function build() {
+      const product = document.getElementById('product').value.trim() || 'product';
+      const audience = document.getElementById('audience').value.trim() || 'target audience';
+      const channel = document.getElementById('channel').value.trim() || 'launch channel';
+      document.getElementById('out').textContent =
+`Localization brief:
+
+Product: ${product}
+Target audience: ${audience}
+Launch channel: ${channel}
+
+Please localize for:
+- natural English launch copy
+- clear headline and tagline
+- practical benefit explanation
+- no awkward literal translation
+- no unsupported claims`;
+    }
+  </script>
+</body>
+</html>

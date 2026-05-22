@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Local Page Checker</title>
+  <meta name="description" content="A free local business homepage checklist generator.">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <nav><a href="../local-business-page-fix.html">Page Fix</a><a href="index.html">Tools</a></nav>
+  <main>
+    <h1>Local Page Checker</h1>
+    <p class="lead">Generate a basic local business page checklist. No SEO guarantees, just clarity checks.</p>
+    <div class="card">
+      <label>Business type<br><input id="business" style="width:100%;min-height:42px"></label><br><br>
+      <label>City or service area<br><input id="area" style="width:100%;min-height:42px"></label><br><br>
+      <button class="button" onclick="build()">Generate checklist</button>
+    </div>
+    <pre id="out"></pre>
+    <p><a class="button" href="../local-business-page-fix.html">Request page fix</a></p>
+  </main>
+  <script>
+    function build() {
+      const business = document.getElementById('business').value.trim() || 'business';
+      const area = document.getElementById('area').value.trim() || 'service area';
+      document.getElementById('out').textContent =
+`Quick checklist for a ${business} in ${area}:
+
+1. First screen says what you do, who you help, and where you serve.
+2. Phone/email/contact button is visible without hunting.
+3. Services are named in customer language, not internal jargon.
+4. Trust signals are visible: reviews, examples, credentials, years, guarantees, or process.
+5. Pricing or next-step expectations are clear enough to reduce bad-fit inquiries.
+6. Page includes a simple FAQ for common objections.
+7. No fake scarcity or unsupported ranking claims.`;
+    }
+  </script>
+</body>
+</html>

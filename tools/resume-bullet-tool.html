@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resume Bullet Tool</title>
+  <meta name="description" content="A free browser tool for drafting clearer resume bullets from rough work notes.">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+  <nav><a href="../resume-audit.html">Resume Audit</a><a href="index.html">Tools</a></nav>
+  <main>
+    <h1>Resume Bullet Tool</h1>
+    <p class="lead">Paste rough work notes. Get a clearer bullet structure you can edit. Nothing is uploaded.</p>
+    <div class="card">
+      <label>Role target<br><input id="role" style="width:100%;min-height:42px"></label><br><br>
+      <label>Rough work notes<br><textarea id="notes" style="width:100%;min-height:150px"></textarea></label><br><br>
+      <button class="button" onclick="build()">Generate draft</button>
+    </div>
+    <pre id="out"></pre>
+    <p><a class="button" href="../resume-audit.html">Request human audit</a></p>
+  </main>
+  <script>
+    function build() {
+      const role = document.getElementById('role').value.trim() || 'target role';
+      const notes = document.getElementById('notes').value.trim() || 'your work notes';
+      document.getElementById('out').textContent =
+`Draft resume bullet patterns for ${role}:
+
+- Improved [process/system/customer outcome] by doing [specific action] using [tool/method].
+- Reduced [time/error/friction] by creating [asset/workflow/checklist] for [team/customer].
+- Built [deliverable] that helped [audience] achieve [clear outcome].
+
+Rewrite prompt:
+Act as a resume editor. Turn these notes into 5 concise resume bullets for ${role}. Use action verbs, concrete outcomes, and no exaggerated claims.
+
+Notes:
+${notes}`;
+    }
+  </script>
+</body>
+</html>
