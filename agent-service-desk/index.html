@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Service Desk</title>
+  <meta name="description" content="Browser-based agent service desk that diagnoses buyer requests, drafts deliverable scopes, and routes qualified leads to compliant checkout links.">
+  <style>
+    :root {
+      --ink: #20242c;
+      --muted: #5d6675;
+      --line: #d9dee7;
+      --paper: #fbfaf7;
+      --accent: #0f766e;
+      --accent-dark: #134e4a;
+      --band: #edf6f2;
+      --warn: #8a4b0f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.62;
+    }
+    main {
+      width: min(1080px, calc(100% - 44px));
+      margin: 0 auto;
+      padding: 56px 0;
+    }
+    h1 {
+      font-size: clamp(40px, 7vw, 74px);
+      line-height: 1.03;
+      letter-spacing: 0;
+      margin: 0 0 18px;
+    }
+    h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      line-height: 1.14;
+      letter-spacing: 0;
+      margin: 0 0 14px;
+    }
+    .lead {
+      max-width: 780px;
+      font-size: clamp(18px, 2.2vw, 23px);
+      color: #334152;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    label { font-weight: 800; display: block; margin-top: 14px; }
+    input, select, textarea {
+      width: 100%;
+      margin-top: 6px;
+      min-height: 44px;
+      border: 1px solid #bcc6d3;
+      border-radius: 8px;
+      padding: 10px;
+      font: inherit;
+      background: white;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      border: 0;
+      font-weight: 850;
+      text-decoration: none;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+    .secondary {
+      background: transparent;
+      color: var(--accent-dark);
+      border: 1px solid var(--accent);
+    }
+    .price {
+      color: var(--accent-dark);
+      font-weight: 850;
+    }
+    .note {
+      background: var(--band);
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 24px;
+    }
+    .warning {
+      background: #fff7ed;
+      border-left-color: var(--warn);
+    }
+    pre {
+      white-space: pre-wrap;
+      background: #111827;
+      color: #f8fafc;
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 220px;
+      overflow: auto;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 820px) {
+      .grid { grid-template-columns: 1fr; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="price">Browser-based sales agent, no paid API</p>
+    <h1>Agent Service Desk</h1>
+    <p class="lead">This desk qualifies a buyer request, drafts a scope, creates a fulfillment prompt, and routes the buyer to a compliant checkout link or email request. Everything runs in the browser.</p>
+
+    <div class="note warning">
+      No payment is collected by this page unless a compliant checkout link is added in <code>config.js</code>. Seller, tax, refund, delivery, and commerce settings must be complete before taking payment.
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Buyer intake</h2>
+        <label>Service
+          <select id="service">
+            <option value="resumeAudit">Resume Signal Audit - USD 39</option>
+            <option value="pageFix">Local Business Page Fix - USD 79</option>
+            <option value="spreadsheetCleanup">Spreadsheet Cleanup Sprint - USD 59</option>
+            <option value="localization">Korean-English Launch Localization - USD 89</option>
+            <option value="contentRepurpose">Creator Content Repurpose Pack - USD 69</option>
+            <option value="aiServiceAudit">AI Service Audit - USD 49</option>
+          </select>
+        </label>
+        <label>Buyer email
+          <input id="buyerEmail" placeholder="buyer@example.com">
+        </label>
+        <label>Buyer context
+          <textarea id="context" placeholder="Paste the buyer's request, website, draft, resume notes, spreadsheet problem, or content idea."></textarea>
+        </label>
+        <label>Risk/sensitivity
+          <select id="risk">
+            <option value="normal">Normal business content</option>
+            <option value="sensitive">May include sensitive data</option>
+            <option value="regulated">Legal, tax, medical, financial, HR, or regulated topic</option>
+          </select>
+        </label>
+        <button class="button" onclick="runDesk()">Run agent desk</button>
+      </section>
+
+      <section class="card">
+        <h2>Agent output</h2>
+        <pre id="output">Run the desk to generate a scope, price, checkout route, and fulfillment prompt.</pre>
+        <div class="actions">
+          <a id="checkout" class="button" href="#" target="_blank" rel="noopener">Checkout / inquiry</a>
+          <button class="button secondary" onclick="copyOutput()">Copy output</button>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="config.js"></script>
+  <script>
+    const offers = {
+      resumeAudit: {
+        name: "Resume Signal Audit",
+        price: "USD 39",
+        deliverables: ["headline and summary rewrite", "up to 5 bullet rewrites", "3 positioning notes", "keyword and clarity checklist"],
+        boundary: "No job placement guarantee. No immigration, legal, or HR advice."
+      },
+      pageFix: {
+        name: "Local Business Page Fix",
+        price: "USD 79",
+        deliverables: ["homepage/service page diagnosis", "rewritten hero section", "service description cleanup", "contact CTA improvements", "5 trust signal suggestions"],
+        boundary: "No SEO ranking guarantee. No ads or paid tools included."
+      },
+      spreadsheetCleanup: {
+        name: "Spreadsheet Cleanup Sprint",
+        price: "USD 59",
+        deliverables: ["column cleanup plan", "formula opportunities", "summary view suggestions", "usage notes"],
+        boundary: "No sensitive data before scope confirmation. Financial, medical, legal, and HR data are not accepted."
+      },
+      localization: {
+        name: "Korean-English Launch Localization",
+        price: "USD 89",
+        deliverables: ["English product description rewrite", "headline and tagline options", "launch post draft", "literal-translation cleanup notes"],
+        boundary: "Marketing localization only. Not certified translation."
+      },
+      contentRepurpose: {
+        name: "Creator Content Repurpose Pack",
+        price: "USD 69",
+        deliverables: ["5 short social posts", "1 newsletter intro", "3 headline options", "7-day posting calendar", "repurposing notes"],
+        boundary: "No platform growth guarantee. Buyer must own or have rights to source content."
+      },
+      aiServiceAudit: {
+        name: "AI Service Audit",
+        price: "USD 49",
+        deliverables: ["short written audit", "revised version", "5 improvement notes", "3 reusable AI prompts"],
+        boundary: "No legal, tax, medical, financial, or HR advice. No revenue guarantee."
+      }
+    };
+
+    function runDesk() {
+      const key = document.getElementById("service").value;
+      const offer = offers[key];
+      const buyerEmail = document.getElementById("buyerEmail").value.trim() || "[buyer email missing]";
+      const context = document.getElementById("context").value.trim() || "[buyer context missing]";
+      const risk = document.getElementById("risk").value;
+
+      const decision = risk === "regulated"
+        ? "Do not accept as-is. Ask the buyer to remove regulated/sensitive material or refer them to a qualified professional."
+        : risk === "sensitive"
+          ? "Request sanitized sample data before checkout. Do not accept private, regulated, or identifying information."
+          : "Qualified for standard inquiry or compliant checkout.";
+
+      const deliverables = offer.deliverables.map(item => `- ${item}`).join("\\n");
+      const fulfillmentPrompt = `Act as a careful service operator. Create the deliverables for ${offer.name}.
+
+Buyer context:
+${context}
+
+Deliverables:
+${deliverables}
+
+Rules:
+- Do not invent facts or proof
+- Do not make guaranteed outcome claims
+- Respect this boundary: ${offer.boundary}
+- If information is missing, list assumptions separately
+- Keep the output practical and client-ready`;
+
+      const report = `${offer.name}
+Price: ${offer.price}
+Buyer: ${buyerEmail}
+Decision: ${decision}
+
+Deliverables:
+${deliverables}
+
+Boundary:
+${offer.boundary}
+
+Buyer context:
+${context}
+
+Fulfillment prompt:
+${fulfillmentPrompt}`;
+
+      document.getElementById("output").textContent = report;
+      const paymentLink = window.AGENT_SERVICE_CONFIG.paymentLinks[key];
+      const subject = encodeURIComponent(window.AGENT_SERVICE_CONFIG.inquirySubjects[key]);
+      const body = encodeURIComponent(`Hi, I want to request checkout details for ${offer.name}.\\n\\nBuyer email: ${buyerEmail}\\n\\nContext:\\n${context}`);
+      const mail = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(window.AGENT_SERVICE_CONFIG.ownerEmail)}&su=${subject}&body=${body}`;
+      const checkout = document.getElementById("checkout");
+      checkout.href = paymentLink || mail;
+      checkout.textContent = paymentLink ? "Open compliant checkout" : "Send checkout request";
+    }
+
+    async function copyOutput() {
+      const text = document.getElementById("output").textContent;
+      await navigator.clipboard.writeText(text);
+    }
+  </script>
+</body>
+</html>
